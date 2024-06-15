@@ -1,21 +1,20 @@
 /* Lucas Ebrenz  2011488 3WC */
 /* Robert Ronald 2020336 3WC */
+//#define MAX 650 //50 linhas no maximo, contando que,
+//                //cada linha tenha 13 caracteres no maximo
+#define MAX 400 // 50 linhas * 8bytes máximos por linha = 400
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "compilalinb.h"
-
-#define MAX 650 //50 linhas no maximo, contando que,
-                //cada linha tenha 13 caracteres no maximo
 
 /* Observacoes
   // Usemos no max 4 "variaveis locais" para resolver o problema
   // No max 2 parametros (p1 e p2)
   // Constantes são escritas na forma $i 
 */
-
 funcp compilaLinB (FILE *f, unsigned char codigo[]){
-  char linha[MAX]; // leitura do arquivo
+  char linha[8]; // leitura do arquivo
   // resultado geral
   int resultado = 0 ; // retorno do resultado apos todos os comandos.
   // Atribuicao
@@ -30,7 +29,7 @@ funcp compilaLinB (FILE *f, unsigned char codigo[]){
   int num; // número da linha compilador ser desviado caso varp !=0 
   // retorno
   char* ret = "ret"; // se essa string for lida acabou a funcao 
-  
+  /*
   while (fgets(linha, sizeof(linha), f)){ // LOOP PARA LER ARQUIVO
     if(strncmp(linha, ret, 3)==0){
       //execucao do retorno
@@ -42,8 +41,50 @@ funcp compilaLinB (FILE *f, unsigned char codigo[]){
       //execucao de operacao
     }
   }
+  */
+  
+  codigo[0]= 0xb8;
+  codigo[1]= 0x00;
+  codigo[2]= 0x00;
+  codigo[3]= 0x00;
+  codigo[4]= 0x00;
   
   // nao pode retornar um inteiro e sim um ponteiro para o
   // inicio da memoria (explicado logo no inicio de implementacao)
-  return !!!;
+  return 0;
 }
+  
+  
+  
+  /*
+  // resultado geral
+  int resultado = 0 ; // retorno do resultado apos todos os comandos.
+  // Atribuicao
+  char expr[2]; // operacao aritmética
+  void* varpAtribuicao; // variavel local ou um parametro
+  // Operacao Aritmetica
+  void* varpOperacaoAritmetica1; // variavel local, ou um parametro,
+  void* varpOperacaoAritmetica2; // ou uma constante inteira
+  char op; // um operador matematico como + - * / 
+  // desvio 
+  char* varpDesvio = "if"; // se encontrada essa string estamos lidando com if
+  int num; // número da linha compilador ser desviado caso varp !=0 
+  // retorno
+  char* retRetorno = "ret"; // se essa string for lida acabou a funcao 
+  
+  while (!feof(f) ){ // LOOP PARA LER ARQUIVO
+    fscanf(f,"",  ) ;
+    if (){
+    
+    }
+  }
+  
+  // valor encontrado apos toda a compilacao
+  return resultado;
+}
+*/
+
+void LiberaFuncao (void *p){
+     // a minima ideia do que fazer nesse bloco.
+}
+
