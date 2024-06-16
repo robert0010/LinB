@@ -16,7 +16,7 @@
 funcp compilaLinB (FILE *f, unsigned char codigo[]){
   char linha[8]; // leitura do arquivo
   // resultado geral
-  int resultado = 0 ; // retorno do resultado apos todos os comandos.
+  //funcp resultado; // retorno do resultado apos todos os comandos.
   // Atribuicao
   char expr[2]; // operacao aritmética
   void* varpAtribuicao; // variavel local ou um parametro
@@ -41,17 +41,71 @@ funcp compilaLinB (FILE *f, unsigned char codigo[]){
       //execucao de operacao
     }
   }
-  */
-  
-  codigo[0]= 0xb8;
-  codigo[1]= 0x00;
-  codigo[2]= 0x00;
-  codigo[3]= 0x00;
-  codigo[4]= 0x00;
-  
+
+  /* todo inicio em assembly eh o mesmo */
+    /*
+        pushq   %rbp
+        movq    %rsp, %rbp
+        subq    $16, %rsp
+    */
+
+  // verificado com objdump 
+  codigo[0] = 0x55;
+  codigo[1] = 0x48;
+  codigo[2] = 0x89;
+  codigo[3] = 0xe5;
+  codigo[4] = 0x48;
+  codigo[5] = 0x83;
+  codigo[6] = 0xec;
+  codigo[7] = 0x10;
+
+  char c;
+
+  while ((c = fgetc(f)) != EOF){ // LOOP PARA LER ARQUIVO ATE O EOF
+      if (c == 'v') {//variavel
+
+      }
+      else if (c == 'p') {//parametro
+
+      }
+      else if (c == 'i') {//condicional
+
+      }
+      else if (c == 'r') {//return
+
+      }
+      else {//outros
+
+      }
+      //printf("%c\n", c);
+    }
+
+  /* assim como o inicio, todo retorno eh igual */
+    /*
+        movl    -16(%rbp), %eax
+        add     $16, %rsp
+        leave
+        ret
+    */
+  *q = 9;
+  char* b = (char*)malloc(sizeof(char) * 9);
+  verificar_erro(b);
+
+  //precisamos criar uma maneira de botarmos essa finalizacao.
+  //usei aux apenas como referencia
+  codigo[aux + 1] = 0x8b;
+  codigo[aux + 2] = 0x45;
+  codigo[aux + 3] = 0xf0;
+  codigo[aux + 4] = 0x48;
+  codigo[aux + 5] = 0x83;
+  codigo[aux + 6] = 0xc4;
+  codigo[aux + 7] = 0x10;
+  codigo[aux + 8] = 0xc9;
+  codigo[aux + 9] = 0xc3;
+
   // nao pode retornar um inteiro e sim um ponteiro para o
   // inicio da memoria (explicado logo no inicio de implementacao)
-  return 0;
+  return (funcp) codigo;
 }
   
   
@@ -83,8 +137,3 @@ funcp compilaLinB (FILE *f, unsigned char codigo[]){
   return resultado;
 }
 */
-
-void LiberaFuncao (void *p){
-     // a minima ideia do que fazer nesse bloco.
-}
-
