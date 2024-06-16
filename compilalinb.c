@@ -87,9 +87,6 @@ funcp compilaLinB (FILE *f, unsigned char codigo[]){
         leave
         ret
     */
-  *q = 9;
-  char* b = (char*)malloc(sizeof(char) * 9);
-  verificar_erro(b);
 
   //precisamos criar uma maneira de botarmos essa finalizacao.
   //usei aux apenas como referencia
